@@ -1,0 +1,456 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Cinema</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"> 
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+     <link rel="stylesheet" href="/static/images/logo2.jpg" />
+     
+     <style>
+     .nav_left {
+        background-color: #f19159;
+        border-top-left-radius: 48px;
+        border-bottom-left-radius: 48px;
+    }
+    
+    .nav-tabs .nav-link.active {
+        background-color: transparent;
+        border-color: transparent;
+        border-top: 4px solid #fff;
+        color: #fff;
+    }
+    
+    .nav-tabs .nav-link {
+        border: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        margin: 0 30px 0 40px;
+    }
+    
+    .nav-tabs {
+        border-bottom: none;
+    }
+    
+    .nav-link {
+        padding: 1rem 0.5rem;
+        color: #fff;
+    }
+    
+    .nav-link:focus,
+    .nav-link:hover {
+        color: #fff;
+    }
+    
+    .search_input {
+        width:100%;
+        border-radius: 10px;
+        border: none;
+        line-height: initial;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        color: #f19159;
+    }
+    
+    .search_input:focus-visible {
+        outline: none;
+    }
+    
+    input.search_input::placeholder {
+        color: #cfd2ec;
+        vertical-align: middle;
+    }
+    
+    .search_img {
+        top: 7px;
+        right: 8px;
+    }
+    
+    .navbar-toggler {
+        border: 3px solid #f19159;
+    }
+    
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(35, 76, 203, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+    /* table css */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+         /* Set font size */
+        color: #333;
+        font-weight: bold;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+    .big-button {
+    width: 200px; /* Adjust width as needed */
+    height: 60px; /* Adjust height as needed */
+    font-size: 18px; /* Adjust font size as needed */
+    padding: 10px 20px; /* Add padding for spacing inside the button */
+    border-radius: 8px; /* Add rounded corners */
+    background-color: #0e06fb; /* Set background color */
+    color: white; /* Set text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Add cursor pointer on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+.big-button:hover {
+    background-color: #0e06fb70; /* Darken background color on hover */
+}
+/* book now page css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: lightgray;
+  /* background-image: url(' static/images/m2.jpg '); */
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  width: 100%;
+
+}
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.movie-poster {
+  width: 200px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 5px;
+}
+.screen {
+  background-color: black;
+  height: 70px;
+  width: 100%;
+  margin: 15px 0;
+  transform: rotateX(-45deg);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+}
+.seats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+.seat {
+  width: 30px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.seat.selected {
+  background-color: #007bff;
+}
+.seat.reserved {
+  background-color: #e74c3c;
+  cursor: not-allowed;
+}
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+.legend-item span {
+  margin-left: 5px;
+}
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+.booking-details {
+  margin-bottom: 20px;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.alert button {
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+div.main{
+        width: 400px;
+        margin: 100px auto 0px auto;
+      }
+      h3{
+        text-align: center;
+        padding: 20px;
+        font-family: sans-serif;
+      }
+      div.register{
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        font-size: 18px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.3);
+        box-shadow: 2px 2px 15px
+        rgba(0,0,0,0.3);
+        color: #fff;}
+
+        .form_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    #registrationForm {
+        width: 300px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    #registrationForm label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    #registrationForm input[type="text"],
+    #registrationForm input[type="email"],
+    #registrationForm input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    #registrationForm button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    #registrationForm button:hover {
+        background-color: #45a049;
+    }
+
+</style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg py-3 ">
+                <div class="pe-lg-0 ps-lg-5 container-fluid justify-content-between">
+                    <a class="navbar-brand" href="#">
+                        <img src="{% static 'images/logo2.jpg' %}" height="60" alt="logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <div class="nav_left d-lg-flex align-items-center">
+                            <nav>
+                                <div class="nav d-block d-lg-flex nav-tabs" id="nav-tab" role="tablist">
+                                  {% if user.is_authenticated %}
+                                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                    type="button" role="tab" aria-controls="home" aria-selected="true">Welcome {{user.username}}!</button>
+                                    {% else %}
+                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                    type="button" role="tab" aria-controls="home" aria-selected="true">Welcome Guest!</button>
+                                    {%endif%}
+                                    <a href="/"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                        type="button" role="tab" aria-controls="home" aria-selected="true" >Home</button></a>
+                                    <a href="{% url 'about' %}"><button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
+                                        type="button" role="tab" aria-controls="about" aria-selected="false" >About</button></a>
+                                    <a href="{% url 'register' %}"><button class="nav-link" id="timing-tab" data-bs-toggle="tab" data-bs-target="#timing"
+                                        type="button" role="tab" aria-controls="timing" aria-selected="false">Register</button></a>
+                                        {% if user.is_authenticated %}
+                                    <a href="{% url 'logout_user' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+                                        type="button" role="tab" aria-controls="courses" aria-selected="false">logout</button></a>
+                                        {% else %}
+                                    <a href="{% url 'login' %}"><button class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#courses"
+                                        type="button" role="tab" aria-controls="courses" aria-selected="false">login</button></a>
+                                        {%endif%}
+                                </div>
+                            </nav>
+                            <div class="position-relative d-inline-block me-lg-4">
+                                <input class="search_input ms-5 mb-3 mb-lg-0 ms-lg-0 pe-5 ps-3" type="search" placeholder="Search"
+                                    aria-label="Search">
+                                <!-- <img class="position-absolute search_img" src="/static/images/search.svg" width="16" height="16" 
+                                    alt="twitter"> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="row" >
+                {%block body %}
+                
+                {% endblock %}
+            </div>
+            <div class="container-fluid my-2 mt-3">
+                <!-- Footer -->
+                <footer
+                        class="text-center text-lg-start text-white"
+                        style="background-color:#f19159">
+                  <!-- Grid container -->
+                  <div class="container-fluid p-2 pb-0">
+                    <!-- Section: Links -->
+                    <section class="">
+                      <!--Grid row-->
+                      <div class="row">
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                          <h6 class="text-uppercase mb-1 font-weight-bold">
+                            <h6 class="text-uppercase mb-2 font-weight-bold">Address</h6>
+                          </h6>
+                          <p>
+                            <i class="fas fa-home mr-3"></i> Star Cinema, Andheri West,<br>
+                              Mumbai-400034
+                            
+                          </p>
+                        </div>
+                        <!-- Grid column -->
+              
+                        <hr class="w-100 clearfix d-md-none" />
+              
+              
+                        <hr class="w-100 clearfix d-md-none" />
+              
+                        <!-- Grid column -->
+                        <hr class="w-100 clearfix d-md-none" />
+              
+                        <!-- Grid column -->
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                          <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                          <!-- <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p> -->
+                          <p><i class="fas fa-envelope mr-3"></i> starcinema34@gmail.com</p>
+                          <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+                          <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+                        </div>
+                        <!-- Grid column -->
+              
+                        <!-- Grid column -->
+                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                          <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+              
+                          <!-- Facebook -->
+                          <a class="btn btn-primary btn-floating m-1"
+                             style="background-color: #3b5998"
+                             href="https://www.facebook.com/login.php/"
+                             role="button"><i class="bi bi-facebook"></i></a>
+              
+                          <!-- Twitter -->
+                          <a
+                             class="btn btn-primary btn-floating m-1"
+                             style="background-color: #55acee"
+                             href="https://twitter.com/i/flow/login"
+                             role="button"><i class="bi bi-twitter-x"></i></a>
+              
+                          <!-- Google -->
+                          <a
+                             class="btn btn-primary btn-floating m-1"
+                             style="background-color: #dd4b39"
+                             href="https://www.google.com/"
+                             role="button"><i class="bi bi-google"></i></a>
+              
+                          <!-- Instagram -->
+                          <a
+                             class="btn btn-primary btn-floating m-1"
+                             style="background-color: #ac2bac"
+                             href="https://www.instagram.com/accounts/login/"
+                             role="button"><i class="bi bi-instagram"></i></a>
+              
+                        </div>
+                      </div>
+                      <!--Grid row-->
+                    </section>
+                    <!-- Section: Links -->
+                  </div>
+                </footer>
+                <!-- Footer -->
+              </div>
+              <!-- End of .container -->
+              
+                  </div>
+                </div>
+              
+
+    
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> 
+</body>
+</html>

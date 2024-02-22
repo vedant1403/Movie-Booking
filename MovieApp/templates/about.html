@@ -1,0 +1,65 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}
+    about Page
+{% endblock %}
+{% block body %}
+<center>
+    <div id="carouselExampleControls" class="carousel slide mt-2" data-bs-ride="carousel" style="height:100%; width: 100%;">
+         <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'images/m5.jpg' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/m2.jpg' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/m5.jpg' %}" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button> 
+        <header>
+          <h1>Welcome to starCinema !!!</h1>
+      </header>
+      
+      <section>
+          <h2>About Us</h2>
+          <p>StarCinema is not just a movie theater; it's an experience. Established in 2005, we take pride in being a cornerstone of entertainment in the heart of the city. Our mission is to provide a captivating and immersive cinematic experience for our diverse community of movie lovers.</p>
+      
+          <h2>Our Vision</h2>
+          <p>At StarCinema, we believe in the power of storytelling through film. Our vision is to be the go-to destination for movie enthusiasts, offering a carefully curated selection of films that cater to all tastes and preferences. Whether you're a fan of action, drama, comedy, or the latest blockbuster hits, we have something for everyone.</p>
+      
+          <h2>State-of-the-Art Facilities</h2>
+          <p>Our theater boasts state-of-the-art facilities designed to enhance your movie-going experience. From crystal-clear digital projection to immersive surround sound, we spare no effort in ensuring that every visit to StarCinema is a visual and auditory delight.</p>
+      
+          <ul>
+              <li><strong>Digital Projection:</strong> Experience the magic of cinema with our top-of-the-line digital projection systems, delivering stunning visuals on the big screen.</li>
+              <li><strong>Immersive Sound:</strong> Our cutting-edge sound systems envelop you in rich and dynamic audio, bringing movies to life like never before.</li>
+              <li><strong>Comfortable Seating:</strong> Relax in our comfortable, spacious seats designed for optimal viewing pleasure. We prioritize your comfort, so you can fully enjoy the show.</li>
+          </ul>
+      
+          <h2>Diverse Movie Selection</h2>
+          <p>We understand that our audience is as diverse as the films we showcase. From mainstream Hollywood blockbusters to independent and international gems, our eclectic lineup ensures there's always something for everyone. Explore new releases, revisit classics, or discover hidden gems – the choice is yours.</p>
+      
+          <h2>Community Engagement</h2>
+          <p>At StarCinema, we value our community. We actively engage with local organizations, schools, and charities to foster a sense of unity and shared enjoyment of cinema. Keep an eye out for our special community events and screenings designed to bring people together through the magic of movies.</p>
+      
+          <h2>Contact Us</h2>
+          <p>Visit us at <strong>iNOX MALL,ANDHERI WEST</strong> to experience the magic of cinema like never before. For inquiries, you can reach us at <strong><a href="mailto:contact@starcinema.com">contact@starcinema.com</a></strong> or call our friendly staff at <strong>555-1234</strong>.</p>
+      </section>
+      <a href="/"><button type="submit" class="big-button">BOOK NOW</button></a>
+      </div>
+      
+    
+    </center>
+
+{% endblock %}
+    
+    

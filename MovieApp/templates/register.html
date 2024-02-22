@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Home Page
+{% endblock %}
+{% block body %}
+<center>
+    {% if messages %}
+            {% for message in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                              {{ message }}
+                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                      {% endfor %}
+                    {% endif %} 
+                    <center>
+                    <div class="d-flex justify-content-center form_container mt-2" style="color: black">
+                        <form method="POST" action="" id="registrationForm">
+                            {%csrf_token%}
+                            {{ form.as_p }}
+                            <button type="submit">Register</button>  
+                        </form>
+                        </div>
+                    </center>
+</center>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %} 
+MOVIE details Page 
+{% endblock %}
+{% block body %}
+<div class="container mt-3">
+    <center>
+            
+     <img src="{{movie.image.url}}" class="card-img-top" alt="..." style="height: 100%; width: 100%;">  
+     <!-- <iframe width="560" height="315" src="{{ movie.youtube_link }}?autoplay=1" frameborder="0" allowfullscreen></iframe> -->
+
+            
+ </div>
+<div>
+        <table border="2" align="center">
+            <tr>
+          <th>Movie Name</th>
+          <td>{{movie.movie_name}}</td>
+        </tr>
+        <tr>
+            <th>Movie type</th>
+            <td>{{movie.movie_type}}</td>
+        </tr>
+        <tr>
+            <th>Movie Certificate</th>
+            <td>{{movie.movie_certificate}}</td>
+        </tr>
+        <tr>
+            <th>Movie Language</th>
+            <td>{{movie.language}}</td>
+        </tr>
+        <tr>
+            <th>Movie Duration</th>
+            <td>{{movie.duration}}</td>
+        </tr>
+        <tr>
+            <th>Movie Director</th>
+            <td>{{movie.director}}</td>
+        </tr>
+        <tr>
+            <th>Movie Cast</th>
+            <td>{{movie.cast}}</td>
+        </tr>
+        <tr>
+            <th>Movie Description</th>
+            <td>{{movie.description}}</td>
+        </tr>
+        </table>
+       
+    </div>
+    <br>
+    <br>
+    </center>
+    <center>
+        <br>
+        <a href="/booknow/{{movie.movie_id}}"><button type="submit" class="big-button">BOOK TICKET</button></a><br>
+        <br>
+        <a href="/"><button type="submit" class="big-button">Back to home Page</button></a>
+        
+</center>
+</div>
+{% endblock %}

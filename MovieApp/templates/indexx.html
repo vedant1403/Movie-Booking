@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Home Page
+{% endblock %}
+{% block body %}
+ <center>
+  {% if messages %}
+                      {% for message in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                              {{ message }}
+                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                      {% endfor %}
+  {% endif %}
+ <div class="container1 mt-2">
+     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'images/m3.jpg' %}" class="d-block w-100" alt="..." >
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/m4.jpg' %}" class="d-block w-100" alt="..." >
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/m1.jpg' %}" class="d-block w-100" alt="..." >
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+ </div>
+ <div class="container mt-3">
+  <center>
+  <div class="btn-group" role="group" aria-label="Basic example">
+   <a href="/" ><button type="button" class="btn btn-warning">ALL</button></a>
+    <a href="{% url 'engList' %}"><button type="button" class="btn btn-warning" style="margin-left: 20px;">ENGLISH</button></a>
+    <a href="{% url 'hinList' %}"><button type="button" class="btn btn-warning" style="margin-left: 20px;">HINDI</button></a>
+    <a href="{% url 'marList' %}"><button type="button" class="btn btn-warning" style="margin-left: 20px;">MARATHI</button></a>
+    <a href="{% url 'souList' %}"><button type="button" class="btn btn-warning" style="margin-left: 20px;">SOUTH</button></a>
+  </center>
+  </div>
+
+  <div class="col-md-12 mt-3" style="text-align: center;">
+    <div class="row m-2" >
+    {% for x in movie %}
+    <div class="col-md-3" >
+    <div class="card" style="width: 18rem;" style="background-color: rgba(255, 255, 255, 0);">
+      <img src="{{x.image.url}}" class="card-img-top" alt="..." >
+      <div class="card-body">
+        <h5 class="card-title">{{x.movie_name}} </h5>
+        <p class="card-text">{{x.movie_type}}</p>
+        <a href="/details/{{x.movie_id}}" class="big-button">Book Now!!</a>
+      
+      </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

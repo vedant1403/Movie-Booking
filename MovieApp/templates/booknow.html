@@ -1,0 +1,165 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}
+    about Page
+{% endblock %}
+{% block body %}
+<center>
+    <div class="container">
+      <h1>Movie Seat Booking</h1>
+      <img src="{{movie.image.url}}" class="card-img-top" alt="..." style="height: 60%; width: 60%;"><br>
+        <h3><b>{{movie.movie_name}}</b></h3>
+        <h2></h2>
+      <!-- <img class="movie-poster" src="https://via.placeholder.com/200x300" alt="Movie Poster">
+      <div class="screen">Screen</div> -->
+      <div class="screen"></div><br>
+      <h4><center>SCREEN THIS SIDE</center></h4>
+      <div class="seats"></div>
+      <div class="legend">
+          <div class="legend-item">
+              <div class="seat" style="background-color: #ccc;"></div>
+              <span>Available</span>
+          </div>
+          <div class="legend-item">
+              <div class="seat" style="background-color: #007bff;"></div>
+              <span>Selected</span>
+          </div>
+          <div class="legend-item">
+              <div class="seat" style="background-color: #e74c3c;"></div>
+              <span>Reserved</span>
+          </div>
+      </div>
+      <form id="bookingForm" action="" method="POST" id="selected-seats-info" >
+      <!-- <form id="bookingForm" action="{% url 'booknow' movie.movie_id %}" method="post"> -->
+          {% csrf_token %}
+          <label for="movie">Movie: {{ movie.movie_name }}</label>
+          <input type="hidden" id="movie_id" name="movie_id" value="{{ movie.id }}">
+          
+          <label for="date">Date:</label>
+          <select id="date" name="selected_date" required>
+              <option value="">Select Date</option>
+              <option value="2024-02-10">February 10, 2024</option>
+              <option value="2024-02-11">February 11, 2024</option>
+              <option value="2024-02-12">February 12, 2024</option>
+          </select>
+          
+          <label for="time">Time:</label>
+          <select id="time" name="selected_time" required>
+              <option value="">Select Time</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="13:00">1:00 PM</option>
+              <option value="18:00">6:00 PM</option>
+          </select>
+          
+          <label for="seats">Number of Seats:</label>
+          <input type="number" id="seats" name="selected_seats" min="1" value="0" required >
+          <div class="booking-details" id="bookingDetails" id="total-amount"></div>
+      
+         <button type="submit" >Book Now</button>
+      </form>
+      
+  </div>
+    
+    
+</center>
+<script>
+
+const seatsContainer = document.querySelector('.seats');
+const bookingForm = document.getElementById('bookingForm');
+const seatsInput = document.getElementById('seats');
+const bookingDetails = document.getElementById('bookingDetails');
+const selectedSeatsInfo = document.getElementById('selected-seats-info');
+const seatPrice = 100; // Assuming the price per seat is $10
+
+// Number of rows and seats per row
+const numRows = 6;
+const seatsPerRow = 10;
+
+// Create seats
+for (let row = 1; row <= numRows; row++) {
+  for (let seat = 1; seat <= seatsPerRow; seat++) {
+      const seatElement = document.createElement('div');
+      seatElement.classList.add('seat');
+      seatElement.dataset.row = row;
+      seatElement.dataset.seat = seat;
+      seatElement.textContent = `${row}${String.fromCharCode(64 + seat)}`;
+      seatsContainer.appendChild(seatElement);
+  }
+}
+
+// Seat selection logic
+const seats = document.querySelectorAll('.seat');
+seats.forEach(seat => {
+  seat.addEventListener('click', () => {
+      if (!seat.classList.contains('reserved')) {
+          seat.classList.toggle('selected');
+          updateSelectedSeatsCount();
+          updateBookingDetails();
+          calculateTotalAmount();
+          updateSelectedSeatsInfo();
+      }
+  });
+});
+
+// Update selected seats count
+function updateSelectedSeatsCount() {
+  const selectedSeats = document.querySelectorAll('.seat.selected');
+  seatsInput.value = selectedSeats.length;
+}
+function updateSelectedSeatsInfo() {
+  const selectedSeats = document.querySelectorAll('.seat.selected');
+  const selectedSeatsIds = Array.from(selectedSeats).map(seat => seat.id); // Assuming the seat IDs are set appropriately
+  selectedSeatsInfo.textContent = `Selected Seats: ${selectedSeatsIds.join(', ')}`;
+}
+
+// Update booking details
+function updateBookingDetails() {
+  const movie = document.getElementById('movie').value;
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  const seats = document.getElementById('seats').value;
+  const totalAmount = calculateTotalAmount();
+
+  bookingDetails.innerHTML = `
+      <h3>Booking Details:</h3>
+      <p><strong>Movie:</strong> ${movie}</p>
+      <p><strong>Date:</strong> ${date}</p>
+      <p><strong>Time:</strong> ${time}</p>
+      <p><strong>Number of Seats:</strong> ${seats}</p>
+      <p><strong>Total Amount:</strong> $${totalAmount.toFixed(2)}</p>
+  `;
+}
+
+// Calculate total amount
+function calculateTotalAmount() {
+  const selectedSeats = document.querySelectorAll('.seat.selected');
+  const totalAmount = selectedSeats.length * seatPrice;
+  return totalAmount;
+}
+function updateTotalAmount() {
+  const totalAmount = calculateTotalAmount();
+  const totalAmountElement = document.getElementById('total-amount');
+  totalAmountElement.textContent = `Total Amount: $${totalAmount}`;
+}
+
+// Call the updateTotalAmount function whenever needed, for example, when the user interacts with the page
+updateTotalAmount();
+
+// Update booking details when date or time changes
+const dateInput = document.getElementById('date');
+const timeInput = document.getElementById('time');
+
+dateInput.addEventListener('change', updateBookingDetails);
+timeInput.addEventListener('change', updateBookingDetails);
+
+// Form submission
+bookingForm.addEventListener('submit', (e) => {
+  //e.preventDefault();
+  const selectedSeats = document.querySelectorAll('.seat.selected');
+  const selectedSeatCodes = Array.from(selectedSeats).map(seat => seat.textContent);
+  console.log(selectedSeatCodes);
+  // You can perform further actions here, like sending the selected seats to a server.
+});
+
+</script>
+{% endblock %}
